@@ -11,7 +11,7 @@ const ERROR = "ERROR";
 const SUCCESS = "SUCCESS";
 const formStates = [INIT, SUBMITTING, ERROR, SUCCESS] as const;
 const formStyles = {
-  "id": "cm3c3pap502lgbiimy9injyi1",
+  "id": "cm3pu6sw003mlgd5j4hftfysl",
   "name": "Default",
   "formStyle": "buttonBelow",
   "placeholderText": "Ivan@yandex.ru",
