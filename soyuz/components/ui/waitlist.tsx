@@ -42,7 +42,7 @@ export function WaitList() {
         console.log(values);
         try {
             setIsLoading(true);
-          const response = await fetch('http://soyuz.work/api/contacts/', {
+          const response = await fetch('https://soyuz.work/api/contacts/', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
