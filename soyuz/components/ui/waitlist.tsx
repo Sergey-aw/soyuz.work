@@ -23,7 +23,8 @@ import { useState } from "react"
 
 const formSchema = z.object({
   email: z.string().email( {
-    message: "Username must be at least 2 characters.",
+    message: "Кажется это неверный email",
+    
   }),
 })
 
@@ -83,7 +84,7 @@ export function WaitList() {
                 <Input placeholder="email" className="bg-white/100" {...field} />
               </FormControl>
               
-              <FormMessage />
+              <FormMessage className="text-white font-formamedium text-base" />
             </FormItem>
           )}
         />
