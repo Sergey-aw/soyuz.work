@@ -25,6 +25,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
+      
+      <link rel="icon" href="/favicon.ico" sizes="any"/>
+      <link rel="icon" href="/logo.svg" type="image/svg+xml"/>
+      <link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
+      <link rel="manifest" href="/site.webmanifest" />
+      <link rel="sitemap" href="/sitemap-index.xml" />
+      <meta property="og:url" content="https://soyuz.work/"/>
+      <meta property="og:title" content="Коворкинг Союз в Туле"/>
+      <meta property="og:type" content="website"/>
+      <meta property="og:description" content="Удобное место для работы в самом центре Тулы"/>
+      <meta property="og:image" content="/coworking_soyuz.jpg"/>
+      <meta property="og:image:alt" content="Коворкинг Soyuz.work в Туле"/>
+
+
+
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

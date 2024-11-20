@@ -15,7 +15,7 @@ export default function Home() {
       style={{objectFit: "cover"}}
       ></Image></div>
       <main className="gap-12 mx-auto text-center">
-       <div className="sm:text-5xl font-bold md:text-7xl font-formamedium shadow text-white">Soyuz.work</div>
+       <div className="sm:text-5xl font-bold md:text-7xl font-formamedium text-white">Soyuz.work</div>
        <div className="sm:text-xl font-formamedium md:text-2xl text-white">Коворкинг в пространстве Союз в Туле</div>
        <div className="pt-10">
 
