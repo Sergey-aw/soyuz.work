@@ -6,7 +6,7 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
-
+import { LoopsClient } from "loops";
 import { Mail } from "lucide-react";
 import { Button } from "@/components/ui/button"
 import {
@@ -39,10 +39,11 @@ export function WaitList() {
      
       // 2. Define a submit handler.
       async function onSubmit(values: z.infer<typeof formSchema>) {
+        
         console.log(values);
         try {
             setIsLoading(true);
-          const response = await fetch('https://soyuz.work/api/contacts/', {
+          const response = await fetch('/api/contacts/', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

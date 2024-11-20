@@ -1,25 +1,44 @@
+// unisender API subscribe new
+
 import { NextRequest, NextResponse } from "next/server";
-import { LoopsClient } from "loops";
+const apiKey = process.env.UNISENDER_API as string;
 
-
-const loops = new LoopsClient(process.env.LOOPS_API_KEY as string);
-  
 export async function POST(request: NextRequest) {
-  const res = await request.json();
-
-  const contactProperties: Record<string, string | number> = {
-    firstName: "", 
-  };
   
-   const email = res["email"];
+    
+      // Assuming you're receiving email and name from the request body
+      const res = await request.json();
 
-  // Note: updateContact() will create or update a contact
+      // UniSender API URL
+      const apiUrl = 'https://api.unisender.com/ru/api/subscribe?format=json';
+      
+      // Prepare your parameters
+      const params = new URLSearchParams({
+        api_key: apiKey, // Replace YOUR_API_KEY with your actual UniSender API key
+        list_ids: '852',
+        double_optin: '3',
+      
+  
+      });
+      params.set('fields[email]', res['email']);
 
-  const resp: {
-    success: boolean,
-    id?: string,
-    message?: string
-  } = await loops.updateContact(email, contactProperties);
 
-  return NextResponse.json({ success: resp.success });
-}
+      // Perform the POST request
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        body: params,
+
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      });
+
+      // Await for response from UniSender
+      const data = await response.json();
+    console.log(response);
+    console.log(NextRequest);
+      return NextResponse.json(data);
+    
+
+  }
+
