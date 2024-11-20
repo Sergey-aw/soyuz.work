@@ -5,7 +5,7 @@ export default function Home() {
   return (
     
     // <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-0 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)] bg-black/30">
-    <div className="grid min-h-screen content-center bg-black/20">
+    <div className="grid min-h-svh content-center bg-black/20">
       <div className="-z-10 w-fit h-fit">
       <Image
       src="/coworking_full.jpg"
