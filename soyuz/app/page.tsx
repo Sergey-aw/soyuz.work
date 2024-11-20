@@ -1,6 +1,6 @@
 import Image from "next/image";
-// import { WaitList } from "@/components/ui/waitlist";
-import LoopsForm from "@/components/ui/loops";
+import { WaitList } from "@/components/ui/waitlist";
+// import LoopsForm from "@/components/ui/loops";
 export default function Home() {
   return (
     
@@ -19,7 +19,7 @@ export default function Home() {
        <div className="sm:text-xl font-formamedium md:text-2xl text-white">Коворкинг в пространстве Союз в Туле</div>
        <div className="pt-10">
 
-      <LoopsForm/>
+      <WaitList/>
        </div>
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">

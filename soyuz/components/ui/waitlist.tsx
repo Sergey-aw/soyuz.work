@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
+import { Mail } from "lucide-react";
 import { Button } from "@/components/ui/button"
 import {
   Form,
@@ -15,6 +16,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { useState } from "react"
 
 const formSchema = z.object({
   email: z.string().email( {
@@ -23,6 +25,8 @@ const formSchema = z.object({
 })
 
 export function WaitList() {
+    const [isLoading, setIsLoading] = useState(false);
+    const [isSuccess, setIsSuccess] = useState(false);
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -31,18 +35,34 @@ export function WaitList() {
       })
      
       // 2. Define a submit handler.
-      function onSubmit(values: z.infer<typeof formSchema>) {
-        const formBody = `email=${encodeURIComponent(values.email)}`;
-
-        // Change this URL to your own endpoint URL
-        fetch("https://app.loops.so/api/newsletter-form/cm3c3pap502lgbiimy9injyi1", {
-          method: "POST",
-          body: formBody,
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-        });
-        console.log(values)
+      async function onSubmit(values: z.infer<typeof formSchema>) {
+        console.log(values);
+        try {
+            setIsLoading(true);
+          const response = await fetch('http://localhost:3000/api/contacts/', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            // Assuming your API expects a direct payload. Adjust according to your API's expected structure.
+            body: JSON.stringify(values),
+          });
+      
+          if (!response.ok) { // Check if the HTTP request was successful.
+            throw new Error('Network response was not ok: ' + response.statusText);
+          }
+      
+          const responseData = await response.json(); // Assuming the response is JSON.
+          // Handle your response here. For example:
+          console.log('Response data:', responseData);
+          setIsSuccess(true);
+        } catch (error) {
+          // Handle any errors here
+          console.error('Error during fetch operation:', error);
+        }
+        finally {
+            setIsLoading(false);
+          }
       }
 
   return (
@@ -63,7 +83,8 @@ export function WaitList() {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full font-forma" size="lg">Напишите, когда откроетесь</Button>
+         
+        <Button type="submit" disabled={isLoading} className="w-full font-forma" size="lg" variant={isSuccess ? 'green' : 'default'}><Mail/>{isLoading ? 'Добавляем вас...' : isSuccess ? 'Спасибо! Будем на связи.' : 'Напишите, когда откроетесь'}</Button>
       </form>
     </Form>
     
