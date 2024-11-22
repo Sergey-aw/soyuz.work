@@ -56,6 +56,23 @@ export default {
   				'5': 'hsl(var(--chart-5))'
   			}
   		},
+
+      keyframes: {
+        textIn: {
+          '0%': { transform: 'translateX(100%)', opacity: '0',display:'none' },
+          '100%': { transform: 'translateX(0)', opacity: '1', display:'block' },
+        },
+        textOut: {
+          '0%': { transform: 'translateX(0)', opacity: '1', display:'block' },
+          '100%': { transform: 'translateX(-100%)', opacity: '0',display:'none' },
+        },
+      },
+      animation: {
+        textIn: 'textIn 1s ease-out forwards',
+        textOut: 'textOut 1s ease-in forwards',
+      },
+    
+
   		screens: {
   			sm: '340px',
   			md: '768px',
