@@ -25,7 +25,7 @@ export default function Home() {
       sequence={[        
         'Soyuz.',
         2000, 
-        'S.',
+        'S',
         2000,
  
       ]}
