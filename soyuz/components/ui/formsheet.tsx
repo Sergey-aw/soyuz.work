@@ -40,7 +40,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { FormLabel as ShadcnFormLabel } from "@/components/ui/form";
 
 export function FormLabel(props) {
-  return <ShadcnFormLabel className="text-base font-formamedium" {...props} />;
+  return <ShadcnFormLabel className="text-lg font-formamedium" {...props} />;
 }
 
 // Updating the form schema to include an email field and features array
@@ -83,7 +83,7 @@ export function SendForm() {
       typeofplace: "",
       workfrom: [],
       comment:"",
-      optInNewsletter: true,
+      optInNewsletter: false,
     },
   });
 
@@ -279,7 +279,7 @@ export function SendForm() {
                     {...field}
                     placeholder="Предложения или идеи"
                     rows={3}
-                    className="w-full border rounded-md p-2 text-sm md:text-base text-[16px]"
+                    className="w-full border rounded-md p-2 text-[16px] md:text-base "
                   />
                 </FormControl>
                 
@@ -300,7 +300,7 @@ export function SendForm() {
                        checked={field.value} // Set initial checked state based on `defaultValues`
                        onCheckedChange={(checked) => field.onChange(checked)}
                        />
-                    <span className="text-sm text-gray-700">Напишите мне, когда можно будет забронировать место.</span>
+                    <span className="text-base text-gray-700">Напишите мне, когда можно будет забронировать место.</span>
                   </label>
                 </FormControl>
                 <FormMessage />
