@@ -137,7 +137,7 @@ export function SendForm() {
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input placeholder="ilovework@day.ru" {...field} />
+                  <Input placeholder="ilovework@soyuz.work" {...field} />
                 </FormControl>
                 <FormDescription>
                   Никому не расскажем, напишем только если вы захотите стать резидентом в первых рядах и поставите <Check className="inline" size={16}/> в конце анкеты. 
@@ -147,7 +147,30 @@ export function SendForm() {
               </FormItem>
             )}
           />
-          
+                  <FormField
+  control={form.control}
+  name="workfrom"
+  render={({ field }) => (
+    <FormItem>
+      <FormLabel>Где вы работаете сейчас?</FormLabel>
+      {["из дома", "в кофейне", "в офисе", "другое"].map((option) => (
+        <label key={option} className="flex items-center space-x-2">
+          <Checkbox
+            checked={field.value.includes(option)}
+            onCheckedChange={(isChecked) => {
+              const newValue = isChecked
+                ? [...field.value, option]
+                : field.value.filter((v) => v !== option);
+              field.onChange(newValue);
+            }}
+          />
+          <span>{option}</span></label>
+        
+      ))}
+      <FormMessage />
+    </FormItem>
+  )}
+/>
           <FormField
             control={form.control}
             name="city"
@@ -167,9 +190,7 @@ export function SendForm() {
                     <SelectItem value="Мне нужна только переговорка">Мне нужна только переговорка</SelectItem>
                   </SelectContent>
                 </Select>
-                <FormDescription>
-                  Select your city from the list above.
-                </FormDescription>
+               
                 <FormMessage />
               </FormItem>
             )}
@@ -208,20 +229,22 @@ export function SendForm() {
             name="features"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Features</FormLabel>
+                <FormLabel>Наличие каких опций важно для вас</FormLabel>
                 <FormDescription>
-                  Select your city from the list above.
+                 Выберите несколько важных для вас опций из списка.
                 </FormDescription>
                 {[
                   "Доступ 24/7",
+                  "Парковка",
                   "Переговорная с ТВ",
                   "Лекторий для мероприятий",
                   "Запись видео и подкастов",
                   "Доступ к принтеру",
-                  "Будка для зум-звонков",
+                  "Место для зум-звонков",
                   "Разные варианты посадки",
-                  "Спец. условия для резидентов",
+                  "Спец. события для резидентов",
                   "Наличие зоны с мягкой посадкой",
+                  "Тихая зона",
                   "Шкафчик для личных вещей"
                 ].map((feature) => (
                   <label key={feature} className="flex items-center space-x-2">
@@ -242,30 +265,7 @@ export function SendForm() {
               </FormItem>
             )}
           />
-          <FormField
-  control={form.control}
-  name="workfrom"
-  render={({ field }) => (
-    <FormItem>
-      <FormLabel>Where do you usually work from?</FormLabel>
-      {["home", "coffee shop", "office", "other"].map((option) => (
-        <label key={option} className="flex items-center space-x-2">
-          <Checkbox
-            checked={field.value.includes(option)}
-            onCheckedChange={(isChecked) => {
-              const newValue = isChecked
-                ? [...field.value, option]
-                : field.value.filter((v) => v !== option);
-              field.onChange(newValue);
-            }}
-          />
-          <span>{option}</span></label>
-        
-      ))}
-      <FormMessage />
-    </FormItem>
-  )}
-/>
+  
    
                 {/* New Comment Field */}
           <FormField
@@ -273,18 +273,16 @@ export function SendForm() {
             name="comment"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Comment</FormLabel>
+                <FormLabel>Комментарий</FormLabel>
                 <FormControl>
                   <textarea
                     {...field}
-                    placeholder="Write everything we need to know."
+                    placeholder="Предложения или идеи"
                     rows={3}
                     className="w-full border rounded-md p-2 text-sm md:text-base text-[16px]"
                   />
                 </FormControl>
-                <FormDescription>
-                  Provide any additional details you think are important.
-                </FormDescription>
+                
                 <FormMessage />
               </FormItem>
             )}
