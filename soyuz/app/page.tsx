@@ -1,9 +1,10 @@
 "use client"
 
 import Image from "next/image";
-
+import Link from "next/link";
 import { WaitList } from "@/components/ui/waitlist";
 import { TypeAnimation } from 'react-type-animation';
+import { ArrowRight } from 'lucide-react';
 // import LoopsForm from "@/components/ui/loops";
 export default function Home() {
   return (
@@ -15,17 +16,18 @@ export default function Home() {
       src="/coworking_full.jpg"
       alt="Коворкинг Союз в Туле"
       sizes="(max-width: 768px) 100vw, 33vw"
+      quality={75}
       fill
       style={{objectFit: "cover"}}
       ></Image></div>
       <main className="gap-12 mx-auto text-center">
-       <div className="sm:text-5xl font-bold md:text-7xl font-formamedium text-white items-baseline flex justify-center">
+       <div className="sm:text-5xl font-bold md:text-6xl font-formamedium text-white items-baseline flex justify-center">
         <div className="bg-black p-3 pl-5 pr-4 pb-2 rounded-2xl w-fit">
        <TypeAnimation
       sequence={[        
         'Soyuz.',
         2000, 
-        'S.',
+        'S',
         2000,
  
       ]}
@@ -35,13 +37,17 @@ export default function Home() {
     />
         </div><div className="pl-3">work</div></div>
        <div className="sm:text-xl font-formamedium md:text-2xl text-white">Коворкинг в пространстве Союз в Туле</div>
-       <div className="pt-10">
+       <div className="pt-16">
 
       <WaitList/>
        </div>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-       
+      <footer className="sm:text-base md:text-lg row-start-3 flex gap-6 pt-8 flex-wrap items-center justify-center text-white font-formamedium">
+       <Link
+       prefetch
+       href="/join"
+       className="hover:underline"
+       >Расскажите, что для вас важно в коворкинге<ArrowRight className="inline" size={22}/></Link>
       </footer>
       
     </div>
