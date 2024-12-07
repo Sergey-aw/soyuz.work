@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
             valueInputOption: 'USER_ENTERED',
             requestBody: {
                 values: [
-                    [body.username, body.email, body.city, body.typeofplace, featuresString, workfromString, body.comment || "", body.optInNewsletter ? "Subscribed" : "Not Subscribed"], // Include features in the row
+                    [body.username, body.email,workfromString,  body.work_other || "", body.occupacy, body.city, body.typeofplace,  body.goals, body.other_goal, featuresString, body.comment || "", body.optInNewsletter ? "Subscribed" : "Not Subscribed"], // Include features in the row
                 ],
             },
         });
