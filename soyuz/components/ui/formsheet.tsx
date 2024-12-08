@@ -247,7 +247,7 @@ export function SendForm() {
               <FormItem>
                 <FormLabel>Чем вы занимаетесь?</FormLabel>
                 <FormControl>
-                  <Input placeholder="Архитектор, проектирую общественные пространства" {...field} />
+                  <Input placeholder="Архитектор, проектирую дома" {...field} />
                 </FormControl>
                 <FormDescription>
                   Нам интересно узнать направление работы или профессию.
@@ -410,7 +410,7 @@ export function SendForm() {
             name="comment"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Комментарий</FormLabel>
+                <FormLabel>Предложения или идеи</FormLabel>
                 <FormControl>
                   <Textarea
                     {...field}
