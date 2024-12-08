@@ -353,7 +353,7 @@ export function SendForm() {
               <FormItem>
                 <FormLabel className="text-base font-formamedium">Свой вариант</FormLabel>
                 <FormControl>
-                  <Input placeholder="например, возможность работать командой" {...field} />
+                  <Input placeholder="смена обстановки" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
