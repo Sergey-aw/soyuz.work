@@ -4,13 +4,20 @@ import { useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import Script from "next/script";
 
+
+declare global {
+    interface Window {
+      ym?: (...args: any[]) => void;
+    }
+  }
+
 export function Metrika() {
   const pathName = usePathname();
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    if (typeof window !== "undefined" && typeof ym !== "undefined") {
-      ym(99172505, "hit", window.location.href);
+    if (typeof window !== "undefined" && typeof window.ym !== "undefined") {
+      window.ym(99172505, "hit", window.location.href);
     }
   }, [pathName, searchParams]);
 
@@ -40,8 +47,4 @@ export function Metrika() {
       </Script>
     </>
   );
-}
-
-function ym(arg0: number, arg1: string, href: string) {
-    throw new Error("Function not implemented.");
 }
