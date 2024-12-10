@@ -9,9 +9,9 @@ export function Metrika() {
   const pathName = usePathname();
   const searchParams = useSearchParams();
 
-  useEffect(() => {
-    ym(99172505, "hit", window.location.href);
-  }, [pathName, searchParams]);
+//   useEffect(() => {
+//     ym(99172505, "hit", window.location.href);
+//   }, [pathName, searchParams]);
 
   return (
     <Script id="yandex-metrika">
