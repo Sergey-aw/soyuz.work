@@ -6,7 +6,7 @@ import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { boolean, z } from "zod";
-import { MailCheckIcon, Check } from "lucide-react";
+import { MailCheckIcon, Check, Send} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -60,8 +60,8 @@ const formSchema = z.object({
   occupacy: z.string().min(3, {
     message: "Слишком короткое название для профессии",
   }),
-  typeofplace: z.string().nonempty({
-    message: "Выберите один из вариантов",
+  typeofplace: z.array(z.string()).nonempty({
+    message: "Выберите хотя бы один вариант",
   }),
   features: z.array(z.string()).nonempty({
     message: "Укажите хотя бы одну полезную для вас опцию",
@@ -107,7 +107,7 @@ export function SendForm() {
       city: "",
       occupacy: "",
       features: [],
-      typeofplace: "",
+      typeofplace: [],
       workfrom: [],
       comment:"",
       optInNewsletter: false,
@@ -162,8 +162,11 @@ export function SendForm() {
 
   return (
     <>
+{ !isSuccess && (
       <Form {...form}>
+        
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        
           <FormField
             control={form.control}
             name="username"
@@ -287,19 +290,28 @@ export function SendForm() {
             name="typeofplace"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Тип рабочего места</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Выберите вариант" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="Плавающее место">Плавающее место</SelectItem>
-                    <SelectItem value="Закреплённое место">Закреплённое место</SelectItem>
-                    <SelectItem value="Переговорка для встреч">Переговорка для встреч</SelectItem>
-                  </SelectContent>
-                </Select>
+                <FormLabel>Какие форматы вам будут интересны</FormLabel>
+                  {[
+                  "Плавающее место",
+                  "Закреплённое место",
+                  "Переговорка для встреч",
+                  "Мини-кабинет на одного",
+                  "Кабинет для 2-х человек",
+                  "Кабинет для команды до 4-х человек",
+                ].map((feature) => (
+                  <label key={feature} className="flex items-center space-x-2">
+                    <Checkbox
+            checked={field.value.includes(feature)}
+            onCheckedChange={(isChecked) => {
+              const newValue = isChecked
+                ? [...field.value, feature]
+                : field.value.filter((v) => v !== feature);
+              field.onChange(newValue);
+            }}
+          />
+                    <span>{feature}</span></label>
+                  
+                ))}
                 
                 <FormDescription>
                   Плавающее место &mdash; каждый день вы можете выбирать новое место из доступных.<br/>
@@ -444,28 +456,33 @@ export function SendForm() {
               </FormItem>
             )}
           />
-
-      <Alert hidden={!isSuccess}>
-        <MailCheckIcon className="h-4 w-4" />
-        <AlertTitle>Юхуу!</AlertTitle>
-        <AlertDescription>
-          Спасибо, что уделили пару минут и заполнили анкету. Так мы лучше сможем понять потребности и учесть их при проектировании коворкинга.
-        </AlertDescription>
-      </Alert>
+          
+     
           <Button
-            className="w-full font-formamedium"
+            className="w-full font-formamedium items-center"
             size="lg"
             type="submit"
             disabled={isLoading, isSuccess}
             variant={isSuccess ? "green" : "default"}
+            
           >
-            {isLoading ? "Анкета отправляется..." : isSuccess ? "Успешно!" : "Отправить"}
+            <Send/>{isLoading ? "Анкета отправляется..." : isSuccess ? "Успешно!" : "Отправить"}
           </Button>
         
         </form>
       </Form>
 
-     
+          )}
+
+<Alert hidden={!isSuccess} className=" border-green-500/50">
+        <MailCheckIcon className="h-4 w-4" />
+        
+        <AlertDescription>
+          Спасибо, что уделили пару минут и заполнили анкету. Так мы лучше сможем понять потребности и учесть их при проектировании коворкинга.
+        </AlertDescription>
+      </Alert>
     </>
+
+
   );
 }

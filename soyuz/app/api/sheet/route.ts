@@ -24,6 +24,7 @@ export async function POST(request: NextRequest) {
         // Combine features into a single string, separated by commas
         const featuresString = body.features.join(", ");
         const workfromString = body.workfrom.join(", ");
+        const typeofplaceString = body.typeofplace.join(", ");
 
         const response = await sheets.spreadsheets.values.append({
             spreadsheetId: process.env.GOOGLE_SHEET_ID,
@@ -31,7 +32,7 @@ export async function POST(request: NextRequest) {
             valueInputOption: 'USER_ENTERED',
             requestBody: {
                 values: [
-                    [body.username, body.email,workfromString,  body.work_other || "", body.occupacy, body.city, body.typeofplace,  body.goals, body.other_goal, featuresString, body.comment || "", body.optInNewsletter ? "Subscribed" : "Not Subscribed"], // Include features in the row
+                    [body.username, body.email,workfromString,  body.work_other || "", body.occupacy, body.city, typeofplaceString,  body.goals, body.other_goal, featuresString, body.comment || "", body.optInNewsletter ? "Subscribed" : "Not Subscribed"], // Include features in the row
                 ],
             },
         });
